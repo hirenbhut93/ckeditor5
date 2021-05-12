@@ -26,65 +26,116 @@
 	<p>You can use this sample to validate whether your <a href="https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/custom-builds.html">custom build</a> works fine.</p>
 </div>
 
-<script src="https://ckeditor.com/apps/ckfinder/3.4.5/ckfinder.js"></script>
+<div id="prv-src">
+NA
+</div>
+<xmp id="html-src">
+No click
+</xmp>
+
+<button onclick="setHtmlSrc()">Set Html Src</button>
+
+<!-- <script src="https://ckeditor.com/apps/ckfinder/3.4.5/ckfinder.js"></script> -->
 <script src="../build/ckeditor.js"></script>
 <script>
+
+	function setHtmlSrc() {
+		document.querySelector('#html-src').innerHTML = editor.getData();
+		document.querySelector('#prv-src').innerHTML = editor.getData();
+	}
+
+	// class VideoUploadAdapter {
+	// 	constructor(loader) {
+	// 		this.loader = loader;
+	// 	}
+
+	// 	upload() {
+	// 		const uploadVideo = async (file) => {
+	// 			this.loader.uploaded = false;
+	// 			return new Promise((resolve) => {
+	// 				setTimeout(() => {
+	// 					this.loader.uploaded = true;
+	// 					resolve({ default: 'http://localhost/dummy-data/file_example_MP4_480_1_5MG.mp4' });
+	// 				}, 2000);
+	// 			});
+	// 		};
+
+	// 		return this.loader.file.then((file) => uploadVideo(file));
+	// 	}
+
+	// 	abort() {
+	// 		return Promise.reject();
+	// 	}
+	// }
+
+	// function VideoUploadAdapterPlugin(editor) {
+	// 	editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+	// 		return new VideoUploadAdapter(loader);
+	// 	};
+	// }
+
+	
+
 	ClassicEditor.create( document.querySelector( '#editor' ), {
+		// extraPlugins: [VideoUploadAdapterPlugin],
 		toolbar: {
-			// items: [
-			// 	'undo',
-			// 	'redo',
-			// 	'heading',
-			// 	'alignment',
-			// 	'-',
-			// 	'link',
-			// 	'insertTable',
-			// 	'uploadImage',
-			// 	'imageInsert',
-			// 	'mediaEmbed',
-			// 	'cKFinder',
-			// 	'|',
-			// 	'bold',
-			// 	'italic',
-			// 	'underline',
-			// 	'strikethrough',
-			// 	'subscript',
-			// 	'superscript',
-			// 	'horizontalLine',
-			// 	'blockQuote',
+			items: [
+				'videoUpload',
+				'undo',
+				'redo',
+				'heading',
+				'alignment',
+				'-',
+				'link',
+				'insertTable',
+				'uploadImage',
+				'imageInsert',
+				'mediaEmbed',
+				'cKFinder',
+				'|',
+				'bold',
+				'italic',
+				'underline',
+				'strikethrough',
+				'subscript',
+				'superscript',
+				'horizontalLine',
+				'blockQuote',
 
-			// 	'outdent',
-			// 	'indent',
+				'outdent',
+				'indent',
 
-			// 	'fontBackgroundColor',
-			// 	'fontColor',
-			// 	'fontSize',
-			// 	'fontFamily',
+				'fontBackgroundColor',
+				'fontColor',
+				'fontSize',
+				'fontFamily',
 
-			// 	'bulletedList',
-			// 	'numberedList',
-			// 	'todoList',
+				'bulletedList',
+				'numberedList',
+				'todoList',
 
-			// 	'MathType',
-			// 	'ChemType',
-			// 	'specialCharacters',
-			// 	'code',
-			// 	'codeBlock',
-			// 	'htmlEmbed',
-			// 	'pageBreak',
-			// ],
+				'MathType',
+				'ChemType',
+				'specialCharacters',
+				'code',
+				'codeBlock',
+				'htmlEmbed',
+				'pageBreak',
+			],
 			shouldNotGroupWhenFull: true,
 			// viewportTopOffset: window.getViewportTopOffsetConfig()
 		},
-		mathTypeParameters : {
-            serviceProviderProperties : {
-                URI : 'http://localhost/demo/math_type',
-                server : 'php'
-            }
-		},
+		mediaEmbed: { previewsInData: true },
+		// mathTypeParameters : {
+        //     serviceProviderProperties : {
+        //         URI : 'http://localhost/demo/math_type',
+        //         server : 'php'
+        //     }
+		// },
 		simpleUpload: {
 			// The URL that the images are uploaded to.
-			uploadUrl: 'http://example.com',
+			uploadUrl: 'http://localhost/office/enterprise3-hiren/backend/web/site/draft-upload-ckeditor',
+			// uploadUrl: 'http://localhost/dummy-data/file_example_MP4_480_1_5MG.mp4',
 
 			// Enable the XMLHttpRequest.withCredentials property.
 			withCredentials: false,
@@ -94,6 +145,44 @@
 			// 	'X-CSRF-TOKEN': 'CSRF-Token',
 			// 	Authorization: 'Bearer <JSON Web Token>'
 			// }
+		},
+		video: {
+			upload: {
+				types: ['mp4'],
+				allowMultipleFiles: false,
+			},
+			styles: [
+				'alignLeft', 'alignCenter', 'alignRight'
+			],
+
+			// Configure the available video resize options.
+			resizeOptions: [
+				{
+					name: 'videoResize:original',
+					label: 'Original',
+					icon: 'original'
+				},
+				{
+					name: 'videoResize:50',
+					label: '50',
+					icon: 'medium'
+				},
+				{
+					name: 'videoResize:75',
+					label: '75',
+					icon: 'large'
+				}
+			],
+
+			// You need to configure the video toolbar, too, so it shows the new style
+			// buttons as well as the resize buttons.
+			toolbar: [
+				'videoStyle:alignLeft', 'videoStyle:alignCenter', 'videoStyle:alignRight',
+				'|',
+				'videoResize:50',
+				'videoResize:75',
+				'videoResize:original'
+			]
 		}
 		// ckfinder: {
 		// 	// Open the file manager in the pop-up window.
