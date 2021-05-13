@@ -213,7 +213,10 @@ export default class VideoUploadEditing extends Plugin {
             })
             .then(data => {
                 model.enqueueChange('transparent', writer => {
-                    writer.setAttributes({uploadStatus: 'complete', src: data.default}, videoElement);
+                    writer.setAttributes(
+						{ uploadStatus: 'complete', src: data.url },
+						videoElement
+					);
                 });
 
                 clean();

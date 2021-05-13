@@ -82,6 +82,8 @@ import VideoUpload from '../video/src/videoupload.js';
 import VideoResize from '../video/src/videoresize.js';
 // import VideoUpload from '@visao/ckeditor5-video/src/videoupload.js';
 
+import Mathematics from 'ckeditor5-math/src/math';
+
 class ClassicEditor extends ClassicEditorBase {}
 
 // Plugins to include in the build.
@@ -157,51 +159,55 @@ ClassicEditor.builtinPlugins = [
 	VideoToolbar,
 	VideoStyle,
 	VideoResize,
+
+	Mathematics
 ];
 
 // Editor configuration.
 ClassicEditor.defaultConfig = {
 	toolbar: {
 		items: [
-			'undo',
-			'redo',
 			'heading',
-			'alignment',
-			'link',
-			'insertTable',
-			'uploadImage',
-			'imageInsert',
-			'mediaEmbed',
-			// 'cKFinder',
-			'|',
 			'bold',
 			'italic',
 			'underline',
-			'strikethrough',
-			'subscript',
-			'superscript',
-			'horizontalLine',
-			'blockQuote',
-
+			'|',
+			'alignment',
+			'bulletedList',
+			'numberedList',
+			'|',
+			'link',
+			'insertTable',
+			'videoUpload',
+			'imageInsert',
+			'mediaEmbed',
+			'|',
 			'outdent',
 			'indent',
-
+			'blockQuote',
+			'-',
 			'fontBackgroundColor',
 			'fontColor',
 			'fontSize',
 			'fontFamily',
-
-			'bulletedList',
-			'numberedList',
+			'|',
 			'todoList',
+			'strikethrough',
+			'subscript',
+			'superscript',
+			'horizontalLine',
 
-			'MathType',
-			'ChemType',
+			'|',
+			'math',
+			'mathType',
+			'chemType',
 			'specialCharacters',
+			'|',
 			'code',
 			'codeBlock',
 			'htmlEmbed',
-			// 'pageBreak',
+			'undo',
+			'redo',
 		],
 		// viewportTopOffset: 30,
 		// shouldNotGroupWhenFull: true
@@ -223,14 +229,27 @@ ClassicEditor.defaultConfig = {
 			'tableProperties',
 		],
 	},
-	// video: {
-	// 	styles: ['alignLeft', 'alignCenter', 'alignRight'],
-	// 	toolbar: [
-	// 		'videoStyle:alignLeft',
-	// 		'videoStyle:alignCenter',
-	// 		'videoStyle:alignRight',
-	// 	],
-	// },
+	mediaEmbed: { previewsInData: true },
+	math: {
+		engine: 'katex',
+		outputType: 'span',
+		forceOutputType: false,
+		enablePreview: true,
+		popupClassName: ['p-3'],
+		previewClassName: ['bg-light', 'p-2'],
+	},
+	video: {
+		styles: ['alignLeft', 'alignCenter', 'alignRight'],
+		toolbar: [
+			'videoStyle:alignLeft',
+			'videoStyle:alignCenter',
+			'videoStyle:alignRight',
+			'|',
+			'videoResize:50',
+			'videoResize:75',
+			'videoResize:original',
+		],
+	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'en',
 	// mathTypeParameters : {
