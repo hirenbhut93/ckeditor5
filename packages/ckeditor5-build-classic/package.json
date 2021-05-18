@@ -1,6 +1,6 @@
 {
   "name": "@hirenbhut93/ckeditor5-classic-full",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The classic editor build of CKEditor 5 – the best browser-based rich text editor.",
   "keywords": [
     "ckeditor5-build-full"
@@ -65,6 +65,7 @@
     "directory": "packages/ckeditor5-build-classic"
   },
   "scripts": {
+    "docs:content-styles": "node ./scripts/docs/build-content-styles.js",
     "build": "webpack --mode production",
     "preversion": "npm run build"
   }

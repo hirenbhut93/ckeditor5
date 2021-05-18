@@ -57,7 +57,7 @@ import LinkImage from '@ckeditor/ckeditor5-link/src/linkimage.js';
 import ListStyle from '@ckeditor/ckeditor5-list/src/liststyle.js';
 // import PageBreak from '@ckeditor/ckeditor5-page-break/src/pagebreak.js';
 
-import MathType from '@wiris/mathtype-ckeditor5';
+// import MathType from '@wiris/mathtype-ckeditor5';
 import MediaEmbedToolbar from '@ckeditor/ckeditor5-media-embed/src/mediaembedtoolbar.js';
 // // import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat.js';
 import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters.js';
@@ -139,7 +139,7 @@ ClassicEditor.builtinPlugins = [
 	ListStyle,
 	// PageBreak,
 
-	MathType,
+	// MathType,
 	SpecialCharacters,
 	SpecialCharactersArrows,
 	SpecialCharactersCurrency,
@@ -185,7 +185,7 @@ ClassicEditor.defaultConfig = {
 			'outdent',
 			'indent',
 			'blockQuote',
-			'-',
+			'|',
 			'fontBackgroundColor',
 			'fontColor',
 			'fontSize',
@@ -196,11 +196,10 @@ ClassicEditor.defaultConfig = {
 			'subscript',
 			'superscript',
 			'horizontalLine',
-
 			'|',
 			'math',
-			'mathType',
-			'chemType',
+			// 'mathType',
+			// 'chemType',
 			'specialCharacters',
 			'|',
 			'code',
