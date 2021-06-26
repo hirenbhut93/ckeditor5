@@ -72,21 +72,37 @@ export default class VideoUploadEditing extends Plugin {
                 return videoTypes.test(file.type);
             });
 
-            const ranges = data.targetRanges.map(viewRange => editor.editing.mapper.toModelRange(viewRange));
+            if ( !videos.length ) {
+                return;
+            }
+
+            evt.stop();
 
             editor.model.change(writer => {
-                // Set selection to paste target.
-                writer.setSelection(ranges);
-
-                if (videos.length) {
-                    evt.stop();
-
-                    // Upload videos after the selection has changed in order to ensure the command's state is refreshed.
-                    editor.model.enqueueChange('default', () => {
-                        editor.execute('videoUpload', {file: videos});
-                    });
+                if ( data.targetRanges ) {
+                    writer.setSelection( data.targetRanges.map( viewRange => editor.editing.mapper.toModelRange( viewRange ) ) );
                 }
+
+                editor.model.enqueueChange( 'default', () => {
+                    editor.execute( 'videoUpload', { file: videos } );
+                } );
             });
+
+            // const ranges = data.targetRanges.map(viewRange => editor.editing.mapper.toModelRange(viewRange));
+
+            // editor.model.change(writer => {
+            //     // Set selection to paste target.
+            //     writer.setSelection(ranges);
+
+            //     if (videos.length) {
+            //         evt.stop();
+
+            //         // Upload videos after the selection has changed in order to ensure the command's state is refreshed.
+            //         editor.model.enqueueChange('default', () => {
+            //             editor.execute('videoUpload', {file: videos});
+            //         });
+            //     }
+            // });
         });
 
 
